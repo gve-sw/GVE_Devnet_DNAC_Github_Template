@@ -1,0 +1,138 @@
+    {% extends "masterPage.html" %}
+
+    {% block content %}
+
+
+
+<form action="/selection" method="POST" >
+    <div class="row">
+        <!-- Left Rail -->
+        <div class="col-xl-9 col-md-4">
+                <div class="section" >
+                    <div class="panel panel--loose panel--raised base-margin-bottom">
+                        <h2 class="subtitle">DNA Center Template Tracker</h2>
+                        <div class="section">
+                            <div class="responsive-table">
+                                <table class="table table--lined table--selectable table">
+                                    <thead>
+
+                                        <tr>
+                                            <th>
+                                                <label class="checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="checkbox"></span>
+                                                </label>
+                                            </th>
+                                            <th class="sortable">Template Name <span class="sort-indicator icon-dropdown"></span></th>
+                                            <th class="text-center"> DNA Center Lab</th>
+                                            <th class="text-center">DNA Center Production</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for template in content %}
+                                    <tr>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="template" value="{{template.name}}">
+                                                <span class="checkbox__input"></span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <span class="icon-router-outline icon-size-20 half-margin-right text-light"></span>
+                                            <span>{{template.name}}</span>
+                                        </td>
+
+                                        <td class="text-center">{{template.inLab}}</td>
+                                        <td class="text-center">{{template.inProd}}</td>
+                                    </tr>
+                                    {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Right Rail -->
+        <div class="col-xl-3 col-md-4">
+
+            <div class="section" >
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+                    <h2 class="subtitle">Push Templates</h2>
+                    <p>Select the templates and the DNA Center to create OR UPDATE the selected templates</p>
+                        <div class="section">
+                            <div class="form-group base-margin-bottom">
+                                <div class="form-group__text select">
+                                    <select id="input-type-push" name="input-type-push">
+                                        <option value="lab">DNA Center Lab</option>
+                                        <option value="prod" selected="">DNA Center Production</option>
+                                    </select>
+                                </div>
+                                <div class="help-block" role="alert">
+                                    <span>*Select the environment to push the templates onto</span>
+                                </div>
+                            </div>
+                        </div>
+                       <div id="loader_push" style="display:none;"><div class="loader"> </div></div>
+                        {% if button == "Push Templates" %}
+                            {% include "alert.html" %}
+                        {% endif %}
+                        <div>
+                            <input name="submit_button" class="btn btn-primary" type="submit" value="Push Templates" onclick="$('#loader_push').show();">
+                        </div>
+                </div>
+            </div>
+
+            <div class="section" >
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+                    <h2 class="subtitle">Update Development Branch</h2>
+                    <p>Create a new branch with the templates from DNA Center Lab</p>
+                    <div id="loader_branch" style="display:none;"><div class="loader"> </div></div>
+                        {% if button == "Update Development Branch" %}
+                            {% include "alert.html" %}
+                        {% endif %}
+                    <div>
+                        <input name="submit_button" class="btn btn-primary" type="submit" value="Update Development Branch" onclick="$('#loader_branch').show();">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" >
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+                    <h2 class="subtitle">Sync</h2>
+                    <p>Check the sync status for templates in Github with DNA Center Lab and DNA Center Production</p>
+                    <div id="loader_sync" style="display:none;"><div class="loader"> </div></div>
+                        {% if button == "Sync" %}
+                            {% include "alert.html" %}
+                        {% endif %}
+                    <div>
+                        <input name="submit_button" class="btn btn-primary" type="submit" value="Sync" onclick="$('#loader_sync').show();">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" >
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+                    <h2 class="subtitle">Update Database</h2>
+                    <p>Update Database to add new templates from DNA Center Lab</p>
+                    <div id="loader_db" style="display:none;"><div class="loader"> </div></div>
+                        {% if button == "Update Database" %}
+                            {% include "alert.html" %}
+                        {% endif %}
+                    <div>
+                        <input name="submit_button" class="btn btn-primary" type="submit" value="Update Database" onclick="$('#loader_db').show();">
+                    </div>
+                    <div class="help-block" role="alert">
+                        <span>*Does not require to select templates</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</form>
+    {%  endblock %}
+

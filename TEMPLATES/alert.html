@@ -1,0 +1,13 @@
+
+    {% if success == True %}
+        <div class="alert alert--success" role="alert">
+                Success: {{ message }}
+        </div>
+    {% endif %}
+
+    {% if success == False %}
+         <div class="alert alert--danger" role="alert">
+                Error: {{ message }}
+        </div>
+    {% endif %}
+
